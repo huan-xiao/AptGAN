@@ -160,13 +160,12 @@ def generate_aptamers(seq_num, seq_min, seq_max, path):
     generator = tf.keras.models.load_model('./models/generator_epoch_9000_GPU.h5', compile=False)
     discriminator = tf.keras.models.load_model('./models/discriminator_epoch_9000_GPU.h5', compile=False)
     
-    
     # 1 generate sequences from trained generator
     seq_from_generator = []
     
-    print("\nGAN-based:")
+    #print("\nGAN-based:")
     while len(seq_from_generator)<seq_num:
-        print(len(seq_from_generator), flush=True, end='\t')
+        #print(len(seq_from_generator), flush=True, end='\t')
         random_latent_vectors = tf.random.normal(shape=(seq_num, noise_dim))
         seq_temp = seq_cleaner(seq_filter(generator(random_latent_vectors)), seq_min, seq_max)
         seq_from_generator.extend(seq_temp)
@@ -190,9 +189,9 @@ def generate_aptamers(seq_num, seq_min, seq_max, path):
     # 2 generate sequences from motif sampling
     seq_from_sampling = []
     
-    print("\nmotif-based:")
+    #print("\nmotif-based:")
     while len(seq_from_sampling)<seq_num:
-        print(len(seq_from_sampling), flush=True, end='\t')
+        #print(len(seq_from_sampling), flush=True, end='\t')
         seq_temp = [RNA_sampling_from_motif(seq_min, seq_max) for i in range(seq_num)]
 
         seq_onehot = np.asarray([one_hot_encode(x) for x in seq_temp])
@@ -234,16 +233,16 @@ def generate_aptamers_for_protein(seq_num, seq_min, seq_max, threshold, path, pr
         
         # 1 generate sequences from trained generator
         seq_from_generator = []
-        print("GAN-based: ", end='')
+        #print("GAN-based: ", end='')
         coe = max(50-seq_max+seq_min, 1)
         random_latent_vectors = tf.random.normal(shape=(seq_num*coe, noise_dim))
         seq_temp = seq_cleaner(seq_filter(generator(random_latent_vectors)), seq_min, seq_max)
         seq_from_generator.extend(seq_temp)
-        print(len(seq_from_generator), flush=True, end='\t')
+        #print(len(seq_from_generator), flush=True, end='\t')
         
         # 2 generate sequences from motif sampling
         seq_from_sampling = []
-        print("motif-based: ", end='')
+        #print("motif-based: ", end='')
         seq_temp = [RNA_sampling_from_motif(seq_min, seq_max) for i in range(seq_num)]
 
         seq_onehot = np.asarray([one_hot_encode(x) for x in seq_temp])
@@ -254,7 +253,7 @@ def generate_aptamers_for_protein(seq_num, seq_min, seq_max, threshold, path, pr
             del seq_temp[i]
 
         seq_from_sampling.extend(seq_cleaner(seq_temp, seq_min, seq_max))
-        print(len(seq_from_sampling), flush=True, end='\t')
+        #print(len(seq_from_sampling), flush=True, end='\t')
         
         # 3 combine the lists
         seq_joint = seq_from_generator + seq_from_sampling
@@ -271,9 +270,9 @@ def generate_aptamers_for_protein(seq_num, seq_min, seq_max, threshold, path, pr
             if y_pred[i]>threshold:
                 targeting_seq.append(seq_joint[i])
                 
-        print("targeting seq: ", end='')       
-        print(len(targeting_seq), flush=True, end='\t')
-        print("")
+        #print("targeting seq: ", end='')       
+        #print(len(targeting_seq), flush=True, end='\t')
+        #print("")
         
     # 5 save to path
     targeting_seq = targeting_seq[:seq_num]

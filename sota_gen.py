@@ -6,7 +6,6 @@ from generation import generate_aptamers_for_protein
 from feature import *
 from xgboost import XGBClassifier
 import pickle
-import os
 
     
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
 import numpy as np
 import xgboost as xgb
-from hyperopt import STATUS_OK, Trials, fmin, hp, tpe
 from sklearn.metrics import log_loss
 import optuna
 import torch

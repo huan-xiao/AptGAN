@@ -2,15 +2,11 @@
 
 import numpy as np
 import pandas as pd
-import datetime
-
 import tensorflow as tf
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Input, Dense, ReLU, Conv1D, Flatten, Reshape
 from tensorflow.keras.optimizers import Adam
-
 import matplotlib.pyplot as plt
-
 import os
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"

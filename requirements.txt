@@ -1,0 +1,13 @@
+optuna==3.6.1
+tensorflow==2.11.0
+numpy==1.24.4
+pandas==2.0.3
+xgboost==1.7.3
+propy3==1.1.1
+ViennaRNA==2.7.0
+repDNA==1.1.4
+scikit_learn==1.2.2
+optuna==3.6.1
+matplotlib==3.7.2
+pickle
+random

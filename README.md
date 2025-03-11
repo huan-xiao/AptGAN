@@ -23,14 +23,10 @@ You can install the dependencies with the versioins specified in requirements.tx
 ## Usage
 You can generate aptamers using AptGAN with the following parameters:
 
---type: 0 (generate aptamer sequences)/ 1(generate apramers for protein)
-
---seq_num: the number of generated sequences
-
---seq_min: the minimum length of generated sequences
-
---seq_max: the maximum length of generated sequences
-
+--type: 0 (generate aptamer sequences)/ 1(generate apramers for protein) 
+--seq_num: the number of generated sequences 
+--seq_min: the minimum length of generated sequences 
+--seq_max: the maximum length of generated sequences 
 --path: the folder for generated results
 
 ```
@@ -52,6 +48,7 @@ $ python main.py --type 1 --seq_num 10 --seq_min 20 --seq_max 120 --threshold 0.
 You can generate the secondary structural file of a protein sequence (in FASTA format) using [s4pred](https://github.com/psipred/s4pred), e.g.:
 
 --outfmt: fas (FASTA format)
+
 followed by "path of protein sequence", and "output path of protein secondary structural file"
 
 ```

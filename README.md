@@ -1,5 +1,6 @@
 # AptGAN
 de novo generation of RNA aptamers for protein targets using generative adversarial network-based deep learning approach
+![title](title.png)
 
 ## Requirements
 * Python 3.8

@@ -22,10 +22,15 @@ You can install the dependencies with the versioins specified in requirements.tx
 
 ## Usage
 You can generate aptamers using AptGAN with the following parameters:
+
 --type: 0 (generate aptamer sequences)/ 1(generate apramers for protein)
+
 --seq_num: the number of generated sequences
+
 --seq_min: the minimum length of generated sequences
+
 --seq_max: the maximum length of generated sequences
+
 --path: the folder for generated results
 
 ```
@@ -33,8 +38,11 @@ $ python main.py --type 0 --seq_num 10 --seq_min 20 --seq_max 120 --path './data
 ```
 
 You can generate aptamers for your target protein using AptGAN with the following additional parameters:
+
 -threshold: binding affinity threshold (default: 0.6)
+
 --pro_file: path of protein sequence in FASTA format
+
 --pro_ss: path of protein secondary structural file (check the generation method below)
 
 ```

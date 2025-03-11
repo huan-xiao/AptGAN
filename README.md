@@ -51,6 +51,9 @@ $ python main.py --type 1 --seq_num 10 --seq_min 20 --seq_max 120 --threshold 0.
 
 You can generate the secondary structural file of a protein sequence (in FASTA format) using [s4pred](https://github.com/psipred/s4pred), e.g.:
 
+--outfmt: fas (FASTA format)
+followed by "path of protein sequence", and "output path of protein secondary structural file"
+
 ```
 $ python ./s4pred/run_model.py --outfmt fas ./dataset/sota/CREB3/CREB3.fasta >./dataset/sota/CREB3/CREB3.fas
 ```

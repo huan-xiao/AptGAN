@@ -6,7 +6,8 @@ from generation import generate_aptamers, generate_aptamers_for_protein
 parser = argparse.ArgumentParser(description="parameters")
 
 # Add arguments
-parser.add_argument('--type', type=int, help='generation type')
+parser.add_argument('--gen_type', type=int, help='generation type')
+parser.add_argument('--apt_type', type=str, help='DNA or RNA')
 parser.add_argument('--seq_num', type=int, help='number of generated sequences')
 parser.add_argument('--seq_min', type=int, help='minimum sequence length(>6)')
 parser.add_argument('--seq_max', type=int, help='maximum sequence length (<186)')
@@ -21,7 +22,8 @@ args = parser.parse_args()
 
 
 if __name__ == "__main__":
-    type = args.type
+    gen_type = args.gen_type
+    apt_type = args.apt_type
     seq_num = args.seq_num
     seq_min = args.seq_min
     seq_max = args.seq_max
@@ -30,10 +32,10 @@ if __name__ == "__main__":
     pro_file = args.pro_file
     pro_ss = args.pro_ss
     
-    if type==0:
-        generate_aptamers(seq_num, seq_min, seq_max, path)
+    if gen_type==0:
+        generate_aptamers(apt_type, seq_num, seq_min, seq_max, path)
     else:
-        generate_aptamers_for_protein(seq_num, seq_min, seq_max, threshold, path, pro_file, pro_ss)
+        generate_aptamers_for_protein(apt_type, seq_num, seq_min, seq_max, threshold, path, pro_file, pro_ss)
     
     
     

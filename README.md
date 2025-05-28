@@ -23,7 +23,9 @@ You can install the dependencies with the versioins specified in requirements.tx
 ## Usage
 **You can generate aptamers using AptGAN with the following parameters:**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--type: 0 (generate aptamer sequences)/ 1(generate apramers for protein)*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--gen_type: 0 (generate aptamer sequences)/ 1(generate apramers for protein)*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--apt_type: 'RNA' or 'DNA'
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--seq_num: the number of generated sequences*
 
@@ -34,7 +36,7 @@ You can install the dependencies with the versioins specified in requirements.tx
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--path: the folder for generated results*
 
 ```
-$ python main.py --type 0 --seq_num 10 --seq_min 20 --seq_max 120 --path './dataset/'
+$ python main.py --gen_type 0 --apt_type 'RNA' --seq_num 10 --seq_min 20 --seq_max 120 --path './dataset/'
 ```
 
 **You can generate aptamers for your target protein using AptGAN with the following additional parameters:**
@@ -46,7 +48,7 @@ $ python main.py --type 0 --seq_num 10 --seq_min 20 --seq_max 120 --path './data
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--pro_ss: path of protein secondary structural file (check the generation method below)*
 
 ```
-$ python main.py --type 1 --seq_num 10 --seq_min 20 --seq_max 120 --threshold 0.6 --path './dataset/' --pro_file './dataset/sota/CREB3/CREB3.fasta' --pro_ss './dataset/sota/CREB3/CREB3_SS.fas'
+$ python main.py --gen_type 1 --apt_type 'RNA' --seq_num 10 --seq_min 20 --seq_max 120 --threshold 0.6 --path './dataset/' --pro_file './dataset/sota/CREB3/CREB3.fasta' --pro_ss './dataset/sota/CREB3/CREB3_SS.fas'
 ```
 
 **You can generate the secondary structural file of a protein sequence (in FASTA format) using [s4pred](https://github.com/psipred/s4pred), e.g.:**

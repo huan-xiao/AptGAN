@@ -1,5 +1,5 @@
 # AptGAN
-de novo generation of RNA aptamers for protein targets using generative adversarial network-based deep learning approach
+de novo generation of RNA or DNA aptamers for protein targets using generative adversarial network-based deep learning approach
 ![title](title.png)
 
 ## Requirements
@@ -23,9 +23,9 @@ You can install the dependencies with the versioins specified in requirements.tx
 ## Usage
 **You can generate aptamers using AptGAN with the following parameters:**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--gen_type: 0 (generate aptamer sequences)/ 1(generate apramers for protein)*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--gen_type: 0 (generate aptamer only)/ 1(generate apramers for protein)*
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--apt_type: 'RNA' or 'DNA'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--apt_type: 'RNA' or 'DNA'*
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--seq_num: the number of generated sequences*
 

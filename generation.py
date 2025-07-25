@@ -4,8 +4,8 @@ import random
 import pickle
 import tensorflow as tf
 import torch
-from feature_rna import Proteins_3Mer, Proteins_PseAAC, Proteins_SS, RNA_Aptamers_3Mer, RNA_Aptamers_PseKNC, RNA_Aptamers_SS, def_convs
-from feature_dna import DNA_Aptamers_3Mer, DNA_Aptamers_PseKNC, DNA_Aptamers_SS
+from feature_rna import RNA_Proteins_3Mer, RNA_Proteins_PseAAC, RNA_Proteins_SS, RNA_Aptamers_3Mer, RNA_Aptamers_PseKNC, RNA_Aptamers_SS, def_convs
+from feature_dna import DNA_Proteins_3Mer, DNA_Proteins_PseAAC, DNA_Proteins_SS, DNA_Aptamers_3Mer, DNA_Aptamers_PseKNC, DNA_Aptamers_SS
 from xgboost import XGBClassifier
 
 noise_dim = 64
@@ -21,6 +21,7 @@ rna_vocab = {"A":0,
              "*":4}
 
 rev_rna_vocab = {v:k for k,v in rna_vocab.items()}
+
 
 dna_vocab = {"A":0,
              "C":1,
@@ -158,28 +159,32 @@ def featurize_apts_with_pro(apt_type, pro_file, pro_ss, apts):
     apt_file_num = len(apts)
     conv1, conv2, conv3 = def_convs()
     
-    # featureing protein
-    pro_3Mer = Proteins_3Mer(pro, conv1)
-    pro_PseAAC = Proteins_PseAAC(pro)
-    pro_SS = Proteins_SS(pro_ss, conv2)
-    
-    pros_3Mer = pro_3Mer.repeat(apt_file_num, 1)
-    pros_PseAAC = pro_PseAAC.repeat(apt_file_num, 1)
-    pros_SS = pro_SS.repeat(apt_file_num, 1)
-    
-    # featuring aptamers
+    # featuring proteins and aptamers
     if apt_type == 'RNA':
+        pro_3Mer = RNA_Proteins_3Mer(pro, conv1)
+        pro_PseAAC = RNA_Proteins_PseAAC(pro)
+        pro_SS = RNA_Proteins_SS(pro_ss, conv2)
+    
         apts_3Mer = RNA_Aptamers_3Mer(apts, conv1)
         apts_PseKNC = RNA_Aptamers_PseKNC(apts)
         apts_SS = RNA_Aptamers_SS(apts, conv3)
     elif apt_type == 'DNA':
+        pro_3Mer = DNA_Proteins_3Mer(pro, conv1)
+        pro_PseAAC = DNA_Proteins_PseAAC(pro)
+        pro_SS = DNA_Proteins_SS(pro_ss, conv2)
+        
         apts_3Mer = DNA_Aptamers_3Mer(apts, conv1)
         apts_PseKNC = DNA_Aptamers_PseKNC(apts)
         apts_SS = DNA_Aptamers_SS(apts, conv3)
+        
+        
+    pros_3Mer = pro_3Mer.repeat(apt_file_num, 1)
+    pros_PseAAC = pro_PseAAC.repeat(apt_file_num, 1)
+    pros_SS = pro_SS.repeat(apt_file_num, 1)
     
     # concatenate feature
     features_tensor = torch.cat((pros_3Mer, pros_PseAAC, pros_SS, apts_3Mer, apts_PseKNC, apts_SS), 1)
-    
+
     # save feature tensors
     return features_tensor
 
@@ -303,12 +308,19 @@ def generate_aptamers_for_protein(apt_type, seq_num, seq_min, seq_max, threshold
         
         # 3 combine the lists
         seq_joint = seq_from_generator + seq_from_sampling
+        
+        if len(seq_joint)==0:
+            continue
+            
         features_tensor = featurize_apts_with_pro(apt_type, pro_file, pro_ss, seq_joint)
         features_tensor = features_tensor.detach().numpy()
         
         # 4 judge the binding affinity
         xgb = XGBClassifier()
-        xgb.load_model("./models/RNA/XGB_classifier.json")
+        if apt_type=='RNA':
+            xgb.load_model("./models/RNA/XGB_classifier.json")
+        elif apt_type=='DNA':
+            xgb.load_model("./models/DNA/XGB_classifier.json")
         
         y_pred = xgb.predict_proba(features_tensor)[:,1]
 

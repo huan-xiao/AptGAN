@@ -8,10 +8,10 @@ import torch
 seed_num=0
 np.random.seed(seed_num)
 
-x_train = torch.load("./dataset/training/x_train.pt") # [5888, 4775]
-y_train = torch.load("./dataset/training/y_train.pt") # 
-x_test = torch.load("./dataset/training/x_test.pt")
-y_test = torch.load("./dataset/training/y_test.pt")
+x_train = torch.load("./dataset/training_rna/x_train.pt") # [5888, 4775]
+y_train = torch.load("./dataset/training_rna/y_train.pt") # 
+x_test = torch.load("./dataset/training_rna/x_test.pt")
+y_test = torch.load("./dataset/training_rna/y_test.pt")
 
 x_train = x_train.detach().numpy()
 y_train = y_train.detach().numpy()

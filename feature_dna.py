@@ -16,7 +16,7 @@ aa_int = {'A':1,'R':2,'N':3,'D':4,'C':5,'E':6,'Q':7,'G':8,'H':9,'I':10,'L':11,'K
 nt_int = {'A':1,'C':2,'G':3,'T':4}
 
 
-def Proteins_3Mer(data, conv1):
+def DNA_Proteins_3Mer(data, conv1):
     proteins_kmer = [] # 1-mer encoding
     max_pro_len = 3999 # requirement for input
 
@@ -39,7 +39,7 @@ def Proteins_3Mer(data, conv1):
 
 
     
-def Proteins_PseAAC(data):
+def DNA_Proteins_PseAAC(data):
     proteins_PseAAC = []
 
     for pro in data:
@@ -53,7 +53,7 @@ def Proteins_PseAAC(data):
     
 
     
-def Proteins_SS(filename, conv2):
+def DNA_Proteins_SS(filename, conv2):
     HEC = []
     max_HEC_len = 399
     file_line_num=0

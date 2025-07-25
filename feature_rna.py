@@ -16,7 +16,7 @@ aa_int = {'A':1,'R':2,'N':3,'D':4,'C':5,'E':6,'Q':7,'G':8,'H':9,'I':10,'L':11,'K
 nt_int = {'A':1,'C':2,'G':3,'U':4}
 
 
-def Proteins_3Mer(data, conv1):
+def RNA_Proteins_3Mer(data, conv1):
     proteins_kmer = [] # 1-mer encoding
     max_pro_len = 3999 # requirement for input
 
@@ -39,7 +39,7 @@ def Proteins_3Mer(data, conv1):
 
 
     
-def Proteins_PseAAC(data):
+def RNA_Proteins_PseAAC(data):
     proteins_PseAAC = []
 
     for pro in data:
@@ -53,7 +53,7 @@ def Proteins_PseAAC(data):
     
 
     
-def Proteins_SS(filename, conv2):
+def RNA_Proteins_SS(filename, conv2):
     HEC = []
     max_HEC_len = 399
     file_line_num=0
@@ -210,7 +210,7 @@ def RNA_Aptamers_SS(data, conv3):# data, conv3
             # concatenate U, P to UP
             U_pad = np.pad(U, (0, max_UP_len-len(U)), 'constant', constant_values=0).reshape(1,-1)
             P_pad = np.pad(P, (0, max_UP_len-len(P)), 'constant', constant_values=0).reshape(1,-1)
-
+            
             temp = np.concatenate((U_pad, P_pad), axis=0)
             UP.append(temp)
             

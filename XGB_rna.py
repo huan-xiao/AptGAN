@@ -47,10 +47,10 @@ def print_metrics(model_name, y_test, y_pred):
     
 if __name__ == "__main__":
     
-    x_train = torch.load("./dataset/training/x_train.pt") # [5888, 4775]
-    x_test = torch.load("./dataset/training/x_test.pt") # [580, 4775]
-    y_train = torch.load("./dataset/training/y_train.pt") # [5888]
-    y_test = torch.load("./dataset/training/y_test.pt") # [580]
+    x_train = torch.load("./dataset/training_rna/x_train.pt") # [5888, 4775]
+    x_test = torch.load("./dataset/training_rna/x_test.pt") # [580, 4775]
+    y_train = torch.load("./dataset/training_rna/y_train.pt") # [5888]
+    y_test = torch.load("./dataset/training_rna/y_test.pt") # [580]
     
     x_train = x_train.detach().numpy()
     x_test = x_test.detach().numpy()
